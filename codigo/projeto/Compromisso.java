@@ -31,7 +31,7 @@ public class Compromisso {
         return arraycompromissos;
     }
 
-    public String relatorioDatas(){
+    public String relatorioCompromissos(){
         int i;
         String dataformatada;
         String aux = "Relatorio:";
