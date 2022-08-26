@@ -1,69 +1,49 @@
 package projeto;
 
 public class Compromisso {
-    public String nomecompromisso;
+    private String nomecompromisso;
+    private Data data;
+    private int repetirdia;
+    private int vezesrepetidas;
+    private Data[] arraydatas;
+    private Compromisso[] arraycompromissos;
 
-    public String datanaoformatada;
-    public Data data;
-    public int repetirdia;
-    public int vezesrepetidas;
-    public Data[] datacompromissos;
-
-    //public RepetirCompromisso repetir;
-    Compromisso(String n, String d, int r, int v) {
-        this.nomecompromisso = n;
-        this.data = formatarData(d);
-        this.repetirdia = r;
-        this.vezesrepetidas = v;
-        this.datacompromissos = repetirCompromisso(r,v);
-        //this.repetir = new RepetirCompromisso(n,data,r,v);
+    Compromisso(String nomecompromisso, String datanaoformatada, int repetirdia, int vezesrepetidas) {
+        this.nomecompromisso = nomecompromisso;
+        this.data = new Data().desformatarData(datanaoformatada);
+        this.arraydatas=data.criarArrayData(this.data,repetirdia,vezesrepetidas);
+        this.repetirdia = repetirdia;
+        this.vezesrepetidas = vezesrepetidas;
+        this.arraycompromissos = criarArrayCompromissos(this.arraydatas,this.nomecompromisso,this.vezesrepetidas);
+        new Calendario(this.arraycompromissos);
     }
-
     Compromisso(String n, Data d) {
         this.nomecompromisso = n;
         this.data = d;
     }
-
-    Compromisso() {
-    }
-
-    public Data[] repetirCompromisso(int r, int v){
-        Data arraydata[] = new Data[v];
-        arraydata[0] = this.data;
-        Data aux = new Data(this.data.dia,this.data.mes,this.data.ano);
+    private Compromisso[] criarArrayCompromissos(Data arraydatas[],String nomecompromisso,int vezesrepetidas){
+        Compromisso arraycompromissos[] = new Compromisso[vezesrepetidas];
         int i;
-        int j;
-        for(i=1;i<v;i++){
-            for(j=0;j<r;j++){
-                aux.dia++;
-                if(aux.dataValida()==false){
-                    aux.dia = 1;
-                    aux.mes++;
-                }
-            }
-            arraydata[i]= new Data(aux.dia,aux.mes,aux.ano);
+        Data aux;
+        for(i=0;i<vezesrepetidas;i++){
+            arraycompromissos[i] = new Compromisso(nomecompromisso,arraydatas[i]);
         }
-        return arraydata;
+        return arraycompromissos;
     }
 
-    public void relatorioDatas(){
+    public String relatorioDatas(){
         int i;
         String dataformatada;
+        String aux = "Relatorio:";
         for(i=0;i<this.vezesrepetidas;i++){
-            dataformatada = this.datacompromissos[i].dataFormatada();
-            System.out.println(dataformatada);
+            dataformatada = this.arraycompromissos[i].data.dataFormatada();
+            aux += ("\n" + dataformatada);
         }
+        return aux;
     }
 
-    public Data formatarData(String datanaoformatada) {
 
-        String[] detalhes = datanaoformatada.split("/");
-        int dia = Integer.parseInt(detalhes[0]);
-        int mes = Integer.parseInt(detalhes[1]);
-        int ano = Integer.parseInt(detalhes[2]);
-
-        data = new Data(dia, mes, ano);
-
+    public Data getData() {
         return data;
     }
 

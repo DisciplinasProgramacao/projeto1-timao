@@ -9,9 +9,9 @@ public class Data {
     private static final String[] DIASDASEMANA = {"sábado", "domingo", "segunda",
             "terça", "quarta", "quinta", "sexta"}; //2022 começa em um sábado
     //atributos
-    public int dia;
-    public int mes;
-    public int ano;
+    private int dia;
+    private int mes;
+    private int ano;
     //#endregion
 
     //#region Construtores
@@ -92,7 +92,7 @@ public class Data {
      *
      * @return TRUE se é válida ; FALSE se não é válida
      */
-    public Boolean dataValida() {
+    private Boolean dataValida() {
         Boolean resposta = true;        //resposta sobre a validade
         int maximoDeDias = 0;
         if (this.ano < 1900)
@@ -149,6 +149,47 @@ public class Data {
         return (String.format("%02d", this.dia) +
                 "/" + String.format("%02d", this.mes) +
                 "/" + String.format("%4d", this.ano));
+    }
+
+    public Data[] criarArrayData(Data data,int r, int v){
+        Data arraydata[] = new Data[v];
+        arraydata[0] = data;
+        Data aux = new Data(data.dia,data.mes,data.ano);
+        int i;
+        int j;
+        for(i=1;i<v;i++){
+            for(j=0;j<r;j++){
+                aux.dia++;
+                if(aux.dataValida()==false){
+                    aux.dia = 1;
+                    aux.mes++;
+                }
+            }
+            arraydata[i]= new Data(aux.dia,aux.mes,aux.ano);
+        }
+        return arraydata;
+    }
+
+    public Data desformatarData(String datanaoformatada) {
+
+        String[] detalhes = datanaoformatada.split("/");
+        int dia = Integer.parseInt(detalhes[0]);
+        int mes = Integer.parseInt(detalhes[1]);
+        int ano = Integer.parseInt(detalhes[2]);
+
+        Data dataformatada = new Data(dia, mes, ano);
+
+        return dataformatada;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+    public int getMes() {
+        return mes;
+    }
+    public int getAno() {
+        return ano;
     }
 
 }
