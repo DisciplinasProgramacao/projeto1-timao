@@ -28,7 +28,7 @@ public class Calendario {
             if(this.diaInicio.getAno() <= Calendario.arrayCalendario[i].getData().getAno() && this.diaFim.getAno() >= Calendario.arrayCalendario[i].getData().getAno()){
                 if(this.diaInicio.getMes() <= Calendario.arrayCalendario[i].getData().getMes() && this.diaFim.getMes() >= Calendario.arrayCalendario[i].getData().getMes()){
                     if(this.diaInicio.getDia() <= Calendario.arrayCalendario[i].getData().getDia() && this.diaFim.getDia() >= Calendario.arrayCalendario[i].getData().getDia()){
-                        aux += ("\n" + Calendario.arrayCalendario[i].getData().dataFormatada());
+                        aux += ("\n" + Calendario.arrayCalendario[i].getNomecompromisso() + ": " + Calendario.arrayCalendario[i].getData().dataFormatada());
                     }
                 }
             }
