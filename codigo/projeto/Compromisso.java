@@ -46,6 +46,10 @@ public class Compromisso {
     public Data getData() {
         return data;
     }
+    
+    public String getNomecompromisso() {
+        return nomecompromisso;
+    }
 
 
 }
