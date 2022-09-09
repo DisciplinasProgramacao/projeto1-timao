@@ -32,7 +32,7 @@ public class Compromisso {
         }
         this.arraydatas=data.criarArrayData(this.data,this.repetirdia,this.vezesrepetidas);  // cria array de datas
         this.arraycompromissos = criarArrayCompromissos(this.arraydatas,this.nomecompromisso,this.vezesrepetidas); // cria array compromissos
-        new Calendario(this.arraycompromissos);  // inicializa calendario de compromissos
+        Calendario.criarArrayCalendario(this.arraycompromissos);  // inicializa calendario de compromissos
     }
 
     /**
@@ -73,12 +73,12 @@ public class Compromisso {
     public String relatorioCompromissos(){
         int i;
         String dataformatada;
-        String aux = "Relatorio:";
+        StringBuilder aux = new StringBuilder("Relatorio: ");
         for(i=0;i<this.vezesrepetidas;i++){
             dataformatada = this.arraycompromissos[i].data.dataFormatada();
-            aux += ("\n" + dataformatada);
+            aux.append("\n"+this.nomecompromisso +": " + dataformatada);
         }
-        return aux;
+        return aux.toString();
     }
 
     public int getVezesrepetidas() {
@@ -94,6 +94,10 @@ public class Compromisso {
 
     public Compromisso[] getArraycompromissos() {
         return arraycompromissos;
+    }
+
+    public String getNomecompromisso() {
+        return nomecompromisso;
     }
 
 
