@@ -197,6 +197,26 @@ public class Data {
         return dataformatada;
     }
 
+
+    /**
+     * Método que compara data inicio, data desejada e data fim
+     *
+     * @param data1 data inicio
+     * @param data2 data desejada
+     * @param data3 data fim
+     * @return true ou false
+     */
+    public static boolean compararDatas(Data data1,Data data2, Data data3){
+        if(data1.getAno() <= data2.getAno() && data3.getAno() >= data2.getAno()){
+            if(data1.getMes() <= data2.getMes() && data3.getMes() >= data2.getMes()){
+                if(data1.getDia() <= data2.getDia() && data3.getDia() >= data2.getDia()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public int getDia() {
         return dia;
     }
