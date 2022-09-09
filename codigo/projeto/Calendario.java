@@ -1,27 +1,18 @@
 public class Calendario {
-
     private static Compromisso[] arrayCalendario = new Compromisso[0];
-
     private Data diaInicio;
-
     private Data diaFim;
-
-
+    Calendario(){
+    }
     /**
-     * Construtor utilizado para inicializar um calendario.
-     * Cria um array de calendario estático unindo os compromissos, e organiza seu conteúdo.
+     * Cria um array de calendario estático dando merge nos compromissos, e organiza seu conteúdo.
      *
      * @param arrayCompromissos array de compromissos
      */
-    Calendario(Compromisso[] arrayCompromissos){
-        arrayCalendario = mergeArrayCalendario(arrayCompromissos, Calendario.arrayCalendario); // cria array calendario unindo os compromissos.
-        sortArrayCalendario(Calendario.arrayCalendario);  // da sort dentro do array calendario
+    public static void criarArrayCalendario(Compromisso[] arrayCompromissos){
+        arrayCalendario = mergeArrayCalendario(arrayCompromissos, Calendario.arrayCalendario);
+        sortArrayCalendario(Calendario.arrayCalendario);
     }
-
-    Calendario(){
-
-    }
-
     /**
      * Método que cria uma string de compromissos levando em conta o dia de inicio e final desejados
      *
@@ -29,32 +20,25 @@ public class Calendario {
      * @param diaFim dia final desejado
      * @return string com datas do array calendario
      */
-
     public String relatorioDatasSelecionadas(String diaInicio, String diaFim){
         this.diaInicio = new Data().desformatarData(diaInicio);  //desformata a data de inicio
         this.diaFim = new Data().desformatarData(diaFim); //desformata a data final
         int i;
-        String aux = ("Relatorio dos Compromissos entre os dias " + this.diaInicio.dataFormatada() + " e " + this.diaFim.dataFormatada() + ":");
+        StringBuilder aux = new StringBuilder ("Relatorio dos Compromissos entre os dias " + this.diaInicio.dataFormatada() + " e " + this.diaFim.dataFormatada() + ":");
         for(i=0;i<Calendario.arrayCalendario.length;i++){
-            if(this.diaInicio.getAno() <= Calendario.arrayCalendario[i].getData().getAno() && this.diaFim.getAno() >= Calendario.arrayCalendario[i].getData().getAno()){
-                if(this.diaInicio.getMes() <= Calendario.arrayCalendario[i].getData().getMes() && this.diaFim.getMes() >= Calendario.arrayCalendario[i].getData().getMes()){
-                    if(this.diaInicio.getDia() <= Calendario.arrayCalendario[i].getData().getDia() && this.diaFim.getDia() >= Calendario.arrayCalendario[i].getData().getDia()){
-                        aux += ("\n" + Calendario.arrayCalendario[i].getData().dataFormatada());
-                    }
-                }
+            if(Data.compararDatas(this.diaInicio,Calendario.arrayCalendario[i].getData(),this.diaFim)) {
+                aux.append("\n" + Calendario.arrayCalendario[i].getNomecompromisso() + ": " + Calendario.arrayCalendario[i].getData().dataFormatada());
             }
         }
-        return aux;
+        return aux.toString();
     }
-
     /**
      * Método que organiza em ordem crescente as datas dentro do array calendario.
      *
      * @param arrayCalendario array do calendario
      * @return array calendario organizado
      */
-
-    private Compromisso[] sortArrayCalendario(Compromisso[] arrayCalendario) {
+    private static Compromisso[] sortArrayCalendario(Compromisso[] arrayCalendario) {
         int pos;
         Compromisso temp;
         for (int i = 0; i < arrayCalendario.length; i++)
@@ -76,7 +60,6 @@ public class Calendario {
         }
         return arrayCalendario;
     }
-
     /**
      * Método que da merge nos compromissos dentro do array calendario, aumentando seu tamanho.
      *
@@ -84,9 +67,7 @@ public class Calendario {
      * @param arrayCalendario array do calendario
      * @return array calendario com merge
      */
-
-
-    private Compromisso[] mergeArrayCalendario(Compromisso[] arrayCompromissos, Compromisso[] arrayCalendario){
+    private static Compromisso[] mergeArrayCalendario(Compromisso[] arrayCompromissos, Compromisso[] arrayCalendario){
         int array1 = arrayCompromissos.length;  //inicializa novo array com tamanho do array compromissos
         int array2 = arrayCalendario.length;  // inicializa novo array2 com tamanho do array de calendario
         Compromisso[] aux = new Compromisso[array1+array2];  //cria um array somando tamanho dos arrays compromissos e calendario
