@@ -1,5 +1,3 @@
-package projeto;
-
 public class Data {
     //#region atributos
     //constante: dias de cada mês
@@ -151,14 +149,24 @@ public class Data {
                 "/" + String.format("%4d", this.ano));
     }
 
-    public Data[] criarArrayData(Data data,int r, int v){
-        Data arraydata[] = new Data[v];
+    /**
+     * Método que cria um array de datas adicionando os dias desejados com tamanho
+     * baseado nas vezes que a data deve ser repetida.
+     *
+     * @param data
+     * @param repetirdia
+     * @param vezesrepetidas
+     * @return um array de datas
+     */
+
+    public Data[] criarArrayData(Data data,int repetirdia, int vezesrepetidas){
+        Data arraydata[] = new Data[vezesrepetidas];
         arraydata[0] = data;
         Data aux = new Data(data.dia,data.mes,data.ano);
         int i;
         int j;
-        for(i=1;i<v;i++){
-            for(j=0;j<r;j++){
+        for(i=1;i<vezesrepetidas;i++){
+            for(j=0;j<repetirdia;j++){
                 aux.dia++;
                 if(aux.dataValida()==false){
                     aux.dia = 1;
@@ -170,7 +178,14 @@ public class Data {
         return arraydata;
     }
 
-    public Data desformatarData(String datanaoformatada) {
+    /**
+     * Método que desformata uma string de data recebida
+     *
+     * @param datanaoformatada
+     * @return um objeto data
+     */
+
+    public static Data desformatarData(String datanaoformatada) {
 
         String[] detalhes = datanaoformatada.split("/");
         int dia = Integer.parseInt(detalhes[0]);
