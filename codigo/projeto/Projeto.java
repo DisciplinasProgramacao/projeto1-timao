@@ -1,7 +1,3 @@
-package projeto;
-
-import java.sql.SQLOutput;
-
 public class Projeto {
     public static void main(String[] args) {
         Compromisso c = new Compromisso("Pilates", "02/05/2020", 7, 4);
