@@ -1,0 +1,35 @@
+public class App {
+    public static void main(String[] args) throws Exception {
+       GrafoNaoPonderado grafo = new GrafoNaoPonderado("Joao");
+       grafo.carregar("./Teste.txt");
+       System.out.println("---------------------------------------------------\nGrafo Nao Ponderado(Joao) \n");
+       System.out.println("Aresta 2->5: " + grafo.existeAresta(2,5));
+       System.out.println("Aresta 6->7: " + grafo.existeAresta(6,7));
+       System.out.println("Aresta 3->4: " + grafo.existeAresta(3,4));
+       System.out.println("Ordem do Grafo: "+ grafo.ordem());
+       System.out.println("Tamanho do Grafo: "+ grafo.tamanho());
+       System.out.println("O Grafo eh Completo?: "+ grafo.completo());
+       ABB<Vertice> vertices = new ABB<>();
+       Vertice v1 = new Vertice(3);
+       vertices.add(3,v1);
+       Vertice v2 = new Vertice(4);
+       vertices.add(4,v2);
+       Vertice v3 = new Vertice(6);
+       vertices.add(6,v3);
+//       Vertice v4 = new Vertice(7);
+//       vertices.add(7,v4);
+       System.out.println("\nSubGrafo de Joao \n");
+       System.out.println("Ordem: " + grafo.subGrafo(vertices).ordem());
+       System.out.println("Tamanho: " + grafo.subGrafo(vertices).tamanho());
+       System.out.println("\n---------------------------------------------------\nGrafo Completo(Jorge) \n");
+       GrafoCompleto grafo2 = new GrafoCompleto("Jorge", 6);
+       System.out.println("O Grafo eh Completo?: "+grafo2.completo());
+       System.out.println("Ordem do Grafo: "+grafo2.ordem());
+       System.out.println("Tamanho do Grafo: "+ grafo2.tamanho());
+       System.out.println("Eh Euleriano?: "+ grafo2.euleriano());
+       System.out.println("\nSubGrafo de Jorge \n");
+       System.out.println("Ordem: " + grafo2.subGrafo(vertices).ordem());
+       System.out.println("Tamanho: " + grafo2.subGrafo(vertices).tamanho());
+       System.out.println("Eh Euleriano?: "+ grafo2.subGrafo(vertices).euleriano());
+    }
+}
